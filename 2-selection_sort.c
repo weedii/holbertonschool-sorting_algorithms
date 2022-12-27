@@ -1,9 +1,11 @@
 #include "sort.h"
+
 /**
  * selection_sort -  the order using the selection sorting algrithm
  *@array: the array to sort
  *@size: the size of the array
  */
+
 void selection_sort(int *array, size_t size)
 {
 	size_t i, j, min;
@@ -24,6 +26,7 @@ void selection_sort(int *array, size_t size)
 			swap = array[i];
 			array[i] = array[min];
 			array[min] = swap;
+			print_array(array, size);
 		}
 	}
 }
