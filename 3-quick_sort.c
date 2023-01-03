@@ -3,53 +3,47 @@
 /***/
 void quick_sort(int *array, size_t size)
 {
-    quicksort(array, 0, size, size);
+    quicksort(array, 0, size - 1, size);
 }
 
 /***/
 void quicksort(int *array, int start, int end, size_t size)
 {
-    int i;
+    int i = 0;
 
-    if (start >= end)
-        return;
-
-    i = partition(array, start, end, size);
-
-    quicksort(array, start, i - 1, size);
-    quicksort(array, i + 1, end, size);
+    if (start < end)
+    {
+        i = partition(array, start, end, size);
+        quicksort(array, start, i - 1, size);
+        quicksort(array, i + 1, end, size);
+    }
 }
 
 /***/
 int partition(int *array, int start, int end, size_t size)
 {
-    int pivot, i, j, tmp;
+    int pivot = array[end], i = start - 1, j = start, tmp = 0;
 
-    pivot = array[end];
-    i = start;
-
-    for (j = start; j < end; j++)
+    while (j <= end - 1)
     {
-        if (array[j] < pivot)
+        if (array[j] <= pivot)
         {
-            if (i != j)
-            {
-                tmp = array[i];
-                array[i] = array[j];
-                array[j] = tmp;
-                print_array(array, size);
-            }
             i++;
+            tmp = array[i];
+            array[i] = array[j];
+            array[j] = tmp;
+            if (i != j)
+                print_array(array, size);
         }
+        j++;
     }
+    tmp = 0;
+    i++;
+    tmp = array[i];
+    array[i] = array[end];
+    array[end] = tmp;
     if (array[i] != array[end])
-    {
-        tmp = 0;
-        tmp = array[i];
-        array[i] = array[end];
-        array[end] = tmp;
         print_array(array, size);
-    }
 
     return (i);
 }
